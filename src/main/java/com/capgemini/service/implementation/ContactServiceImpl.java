@@ -69,7 +69,7 @@ public class ContactServiceImpl implements ContactService{
 			}
 		}
 		
-		System.out.print("Enter State : "+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case");
+		System.out.print("Enter State : "+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case \n");
 		String state;
 		for(;;) {
 			try {
@@ -87,7 +87,7 @@ public class ContactServiceImpl implements ContactService{
 		}
 		}
 		
-		System.out.print("Enter Zip : ");
+		System.out.print("Enter Zip :"+"\n"+"Zip code is 6 digits long space after 3rd digit is optional \n");
 		String zip = sc.nextLine();
 		for(;;) {
 			try {
@@ -98,7 +98,7 @@ public class ContactServiceImpl implements ContactService{
 				break;
 			} 
 			else {
-				System.out.println("Wrong Input, Enter again"+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case");				
+				System.out.println("Wrong Input, Enter again"+"\n"+"Zip code is 6 digits long space after 3rd digit is optional");				
 			}
 			} catch (Exception e) {
 				throw e;
@@ -106,7 +106,7 @@ public class ContactServiceImpl implements ContactService{
 		}
 		
 		System.out.print("Enter Phone : "+"\n"
-				+ "Correct number should start with country code followed by space and 10 digit no.");
+				+ "Correct number should start with country code followed by space and 10 digit no. \n");
 		String phoneNumber;
 		for (;;) {
 			try {
@@ -124,7 +124,7 @@ public class ContactServiceImpl implements ContactService{
 			}
 		}
 		
-		System.out.print("Enter Email : ");
+		System.out.print("Enter Email : "+"\n"+ "Correct email should consist of valid TLD's and at least 3 chracters before any special chracter \n");
 		String email;
 		for (;;) {
 			try {
@@ -134,8 +134,7 @@ public class ContactServiceImpl implements ContactService{
 					System.out.println("Validated Email");
 					break;
 				} else {
-					System.out.println("Wrong Input, Enter again" + "\n"
-							+ "Correct number should start with country code followed by space and 10 digit no.");
+					System.out.println("Wrong Input, Enter again" +"\n"+ "Correct email should consit of valid TLD's and at least 3 chracters before any special chracter");
 				}
 			} catch (Exception e) {
 				throw e;
