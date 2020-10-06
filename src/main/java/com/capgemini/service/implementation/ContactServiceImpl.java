@@ -6,10 +6,10 @@ import com.capgemini.dto.Contacts;
 import com.capgemini.service.ContactService;
 import com.capgemini.service.Validate;
 
-public class ContactServiceImpl implements ContactService{
-	
+public class ContactServiceImpl implements ContactService {
+
 	Scanner sc = new Scanner(System.in);
-	
+
 	public void createPerson() {
 		
 		System.out.print("Enter First Name : " + "\n" + "Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.\n");
@@ -49,7 +49,20 @@ public class ContactServiceImpl implements ContactService{
 		}
 
 		System.out.print("Enter Address : ");
-		String address = sc.nextLine();
+		String address;
+		try {
+			for(;;) {
+			address	= sc.nextLine();
+			if (address == "") {
+				System.out.println("Invalid Entry, Try again \n");
+				continue;
+			}
+			else
+				break;
+		} 
+		}catch (Exception e) {
+			throw e;
+		}
 		
 		System.out.print("Enter City : " + "\n"+"Inside city name all words should start with first alphabet as Upper Case followed by all lower case \n" );
 		String city;
@@ -87,8 +100,8 @@ public class ContactServiceImpl implements ContactService{
 		}
 		}
 		
-		System.out.print("Enter Zip :"+"\n"+"Zip code is 6 digits long space after 3rd digit is optional \n");
-		String zip = sc.nextLine();
+		System.out.print("Enter Zip : \n" + "Pin Code should be 6 digit long with an optional space after 3rd chracter \n");
+		String zip;
 		for(;;) {
 			try {
 			zip=sc.nextLine();
@@ -98,7 +111,7 @@ public class ContactServiceImpl implements ContactService{
 				break;
 			} 
 			else {
-				System.out.println("Wrong Input, Enter again"+"\n"+"Zip code is 6 digits long space after 3rd digit is optional");				
+				System.out.println("Wrong Input, Enter again"+"\n"+"Pin Code should be 6 digit long with an optional space after 3rd chracter");				
 			}
 			} catch (Exception e) {
 				throw e;
@@ -124,7 +137,8 @@ public class ContactServiceImpl implements ContactService{
 			}
 		}
 		
-		System.out.print("Enter Email : "+"\n"+ "Correct email should consist of valid TLD's and at least 3 chracters before any special chracter \n");
+
+		System.out.print("Enter Email : \n" + "Correct email should be in Lower Case and it should have valid TLD's \n");
 		String email;
 		for (;;) {
 			try {
@@ -134,14 +148,14 @@ public class ContactServiceImpl implements ContactService{
 					System.out.println("Validated Email");
 					break;
 				} else {
-					System.out.println("Wrong Input, Enter again" +"\n"+ "Correct email should consit of valid TLD's and at least 3 chracters before any special chracter");
+					System.out.println("Wrong Input, Enter again" + "\n"
+							+ "Correct email should be in Lower Case and it should have valid TLD's");
 				}
 			} catch (Exception e) {
 				throw e;
 			}
 		}
 		
-		sc.close();
 		Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
 		System.out.println(contact);
 	}
