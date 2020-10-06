@@ -55,6 +55,7 @@ public class ContactServiceImpl implements ContactService {
 				sc.nextLine();
 				switch (option) {
 				case 0:
+					System.out.println("Updated Contact");
 					System.out.println("Exit Edit Person tab");
 					i=1;
 					break;
@@ -90,6 +91,7 @@ public class ContactServiceImpl implements ContactService {
 					System.out.println(
 							"Correct number should start with country code followed by space and 10 digit no. ");
 					contact.setPhoneNumber(validatedPhoneNumber());
+					break;
 				case 8:
 					System.out.println("Correct email should be in Lower Case and it should have valid TLD's ");
 					contact.setEmail(validatedEmail());
@@ -105,6 +107,17 @@ public class ContactServiceImpl implements ContactService {
 		System.out.println(contact);
 	}
 
+	@Override
+	public void deletePerson() {
+		System.out.println(contact);
+		System.out.println("Enter the first name of the contact you want to edit.");
+		String firstName = sc.nextLine();
+		if (firstName.equalsIgnoreCase(contact.getFirstName())) {
+			contact = new Contacts(null, null, null, null, null, null, null, null);
+			System.out.println("Deleted Contact. ");
+		}		
+	}
+	
 	private String validatedFirstName() {
 		String firstName;
 		for (;;) {
