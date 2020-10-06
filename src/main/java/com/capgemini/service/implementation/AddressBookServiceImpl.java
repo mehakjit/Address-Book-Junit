@@ -8,11 +8,12 @@ import com.capgemini.service.ContactService;
 public class AddressBookServiceImpl implements AddressBookService{
 	
 	Scanner sc = new Scanner(System.in);
+	ContactService contactService = new ContactServiceImpl();
 
 	public void showOptions() {
 		int i=1;
 		while (i!=0) {
-		System.out.println("Press 1 to add contacts \n"+"Press 0 to Exit");
+		System.out.println("Press 1 to add contacts \n"+"Press 2 to edit contact \n"+"Press 0 to Exit ");
 		int options = sc.nextInt();
 			switch (options) {
 			case 0:
@@ -22,15 +23,22 @@ public class AddressBookServiceImpl implements AddressBookService{
 			case 1:
 				createPerson();
 				break;
+			case 2:
+				editPerson();
+				break;
 			default:
 				System.out.println("Wrong input enter again");
 			}
 		}
 	}
-
+	@Override
 	public void createPerson() {
-		ContactService contactservice =new ContactServiceImpl();
-		contactservice.createPerson();
+		contactService.createPerson();
+	}
+
+	@Override
+	public void editPerson() {
+		contactService.editPerson();		
 	}
 
 	}

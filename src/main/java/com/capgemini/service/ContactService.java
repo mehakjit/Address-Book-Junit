@@ -4,4 +4,5 @@ package com.capgemini.service;
 
 public interface ContactService {
 	public void createPerson();
+	public void editPerson();
 }
