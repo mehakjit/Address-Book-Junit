@@ -49,7 +49,20 @@ public class ContactServiceImpl implements ContactService{
 		}
 
 		System.out.print("Enter Address : ");
-		String address = sc.nextLine();
+		String address;
+		try {
+			for(;;) {
+			address	= sc.nextLine();
+			if (address == "") {
+				System.out.println("Invalid Entry, Try again \n");
+				continue;
+			}
+			else
+				break;
+		} 
+		}catch (Exception e) {
+			throw e;
+		}
 		
 		System.out.print("Enter City : " + "\n"+"Inside city name all words should start with first alphabet as Upper Case followed by all lower case \n" );
 		String city;
@@ -69,7 +82,7 @@ public class ContactServiceImpl implements ContactService{
 			}
 		}
 		
-		System.out.print("Enter State : "+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case");
+		System.out.print("Enter State : "+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case \n");
 		String state;
 		for(;;) {
 			try {
@@ -87,8 +100,8 @@ public class ContactServiceImpl implements ContactService{
 		}
 		}
 		
-		System.out.print("Enter Zip : ");
-		String zip = sc.nextLine();
+		System.out.print("Enter Zip : \n" + "Pin Code should be 6 digit long with an optional space after 3rd chracter \n");
+		String zip;
 		for(;;) {
 			try {
 			zip=sc.nextLine();
@@ -98,7 +111,7 @@ public class ContactServiceImpl implements ContactService{
 				break;
 			} 
 			else {
-				System.out.println("Wrong Input, Enter again"+"\n"+"Inside state name all words should start with first alphabet as Upper Case followed by all lower case");				
+				System.out.println("Wrong Input, Enter again"+"\n"+"Pin Code should be 6 digit long with an optional space after 3rd chracter");				
 			}
 			} catch (Exception e) {
 				throw e;
@@ -106,7 +119,7 @@ public class ContactServiceImpl implements ContactService{
 		}
 		
 		System.out.print("Enter Phone : "+"\n"
-				+ "Correct number should start with country code followed by space and 10 digit no.");
+				+ "Correct number should start with country code followed by space and 10 digit no. \n");
 		String phoneNumber;
 		for (;;) {
 			try {
@@ -124,7 +137,7 @@ public class ContactServiceImpl implements ContactService{
 			}
 		}
 		
-		System.out.print("Enter Email : ");
+		System.out.print("Enter Email : \n" + "Correct email should be in Lower Case and it should have valid TLD's \n");
 		String email;
 		for (;;) {
 			try {
@@ -135,14 +148,13 @@ public class ContactServiceImpl implements ContactService{
 					break;
 				} else {
 					System.out.println("Wrong Input, Enter again" + "\n"
-							+ "Correct number should start with country code followed by space and 10 digit no.");
+							+ "Correct email should be in Lower Case and it should have valid TLD's");
 				}
 			} catch (Exception e) {
 				throw e;
 			}
 		}
 		
-		sc.close();
 		Contacts contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
 		System.out.println(contact);
 	}
