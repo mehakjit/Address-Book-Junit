@@ -2,6 +2,7 @@ package com.capgemini.service.implementation;
 
 import java.util.Scanner;
 
+import com.capgemini.dto.AddressBook;
 import com.capgemini.dto.Contacts;
 import com.capgemini.service.ContactService;
 import com.capgemini.service.Validate;
@@ -10,6 +11,7 @@ public class ContactServiceImpl implements ContactService {
 
 	Scanner sc = new Scanner(System.in);
 	Validate validate = new Validation();
+	AddressBook addressbook = new AddressBook();
 	Contacts contact;
 
 	public void createPerson() {
@@ -37,87 +39,119 @@ public class ContactServiceImpl implements ContactService {
 				.print("Enter Email : \n" + "Correct email should be in Lower Case and it should have valid TLD's \n");
 		String email = validatedEmail();
 		contact = new Contacts(firstName, lastName, address, city, state, zip, phoneNumber, email);
-		System.out.println(contact);
+		addressbook.addContact(contact);
+		addressbook.printContacts();
 	}
 
 	public void editPerson() {
-		System.out.println(contact);
+		addressbook.printContacts();
 		System.out.println("Enter the first name of the contact you want to edit.");
 		String firstName = sc.nextLine();
-		if (firstName.equalsIgnoreCase(contact.getFirstName())) {
-			int i = 0;
-			while (i!=1) {
-				System.out.println("Press 1 to edit First Name \n" + "Press 2 to edit LastName \n"
-						+ "Press 3 to edit Address \n" + "Press 4 to edit City Name \n"
-						+ "Press 5 to edit State Name \n" + "Press 6 to edit Zip \n" + "Press 7 to edit Phone Number \n"
-						+ "Press 8 to edit email \n" + "Press 0 to exit.");
-				int option = sc.nextInt();
-				sc.nextLine();
-				switch (option) {
-				case 0:
-					System.out.println("Updated Contact");
-					System.out.println("Exit Edit Person tab");
-					i=1;
-					break;
-				case 1:
-					System.out.println(
-							"Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.");
-					contact.setFirstName(validatedFirstName());
-					break;
-				case 2:
-					System.out.println(
-							"Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.");
-					contact.setLastName(validatedLastName());
-					break;
-				case 3:
-					System.out.println("Enter address ");
-					contact.setAddress(validatedAddress());
-					break;
-				case 4:
-					System.out.println(
-							"Inside city name all words should start with first alphabet as Upper Case followed by all lower case ");
-					contact.setCity(validatedCity());
-					break;
-				case 5:
-					System.out.println(
-							"Inside state name all words should start with first alphabet as Upper Case followed by all lower case ");
-					contact.setState(validatedState());
-					break;
-				case 6:
-					System.out.println("Pin Code should be 6 digit long with an optional space after 3rd chracter ");
-					contact.setZip(validatedZip());
-					break;
-				case 7:
-					System.out.println(
-							"Correct number should start with country code followed by space and 10 digit no. ");
-					contact.setPhoneNumber(validatedPhoneNumber());
-					break;
-				case 8:
-					System.out.println("Correct email should be in Lower Case and it should have valid TLD's ");
-					contact.setEmail(validatedEmail());
-					break;
-				default:
-					System.out.println("Wrong Input, Enter again ");
-					break;
+		int count = 0;
+		for (Contacts i : addressbook.contacts) {
+			if (firstName.equalsIgnoreCase(i.getFirstName())) {
+				count = count + 1;
+				int a = 0;
+				while (a != 1) {
+					System.out.println("Press 1 to edit First Name \n" + "Press 2 to edit LastName \n"
+							+ "Press 3 to edit Address \n" + "Press 4 to edit City Name \n"
+							+ "Press 5 to edit State Name \n" + "Press 6 to edit Zip \n"
+							+ "Press 7 to edit Phone Number \n" + "Press 8 to edit email \n" + "Press 0 to exit.");
+					int option = sc.nextInt();
+					sc.nextLine();
+					switch (option) {
+					case 0:
+						System.out.println("Updated Contact");
+						System.out.println("Exit Edit Person tab");
+						a = 1;
+						break;
+					case 1:
+						System.out.println(
+								"Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.");
+						i.setFirstName(validatedFirstName());
+						System.out.println(i);
+						break;
+					case 2:
+						System.out.println(
+								"Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.");
+						i.setLastName(validatedLastName());
+						System.out.println(i);
+						break;
+					case 3:
+						System.out.println("Enter address ");
+						i.setAddress(validatedAddress());
+						System.out.println(i);
+						break;
+					case 4:
+						System.out.println(
+								"Inside city name all words should start with first alphabet as Upper Case followed by all lower case ");
+						i.setCity(validatedCity());
+						System.out.println(i);
+						break;
+					case 5:
+						System.out.println(
+								"Inside state name all words should start with first alphabet as Upper Case followed by all lower case ");
+						i.setState(validatedState());
+						System.out.println(i);
+						break;
+					case 6:
+						System.out
+								.println("Pin Code should be 6 digit long with an optional space after 3rd chracter ");
+						i.setZip(validatedZip());
+						System.out.println(i);
+						break;
+					case 7:
+						System.out.println(
+								"Correct number should start with country code followed by space and 10 digit no. ");
+						i.setPhoneNumber(validatedPhoneNumber());
+						System.out.println(i);
+						break;
+					case 8:
+						System.out.println("Correct email should be in Lower Case and it should have valid TLD's ");
+						i.setEmail(validatedEmail());
+						System.out.println(i);
+						break;
+					default:
+						System.out.println("Wrong Input, Enter again ");
+						System.out.println(i);
+						break;
+					}
 				}
 			}
 		}
-		else 
-			System.out.println("No Such Contact found ");
-		System.out.println(contact);
+		if (count == 0)
+			System.out.println("No Such Contact found");
 	}
 
 	@Override
 	public void deletePerson() {
-		System.out.println(contact);
-		System.out.println("Enter the first name of the contact you want to edit.");
+		addressbook.printContacts();
+		System.out.println("Enter the first name of the contact you want to delete.");
 		String firstName = sc.nextLine();
-		if (firstName.equalsIgnoreCase(contact.getFirstName())) {
-			contact = new Contacts(null, null, null, null, null, null, null, null);
-			System.out.println("Deleted Contact. ");
-		}		
+		int count = 0;
+		for (Contacts i : addressbook.contacts) {
+			if (firstName.equalsIgnoreCase(i.getFirstName())) {
+				System.out.println(i);
+				System.out.println("Press 1 to delete this Contact \n" + "Press 2 to skip");
+				int option = sc.nextInt();
+				switch (option) {
+				case 1:
+					addressbook.deleteContact(i);
+					System.out.println("Deleted Contact. ");
+					break;
+				case 2:
+					break;
+				default:
+					System.out.println("Wrong Input");
+					break;
+				}
+			}
+		}
+		if (count == 0)
+			System.out.println("No such contact Found");
+		addressbook.printContacts();
 	}
-	
+
 	private String validatedFirstName() {
 		String firstName;
 		for (;;) {
