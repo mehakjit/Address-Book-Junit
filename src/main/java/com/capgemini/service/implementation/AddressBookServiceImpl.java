@@ -12,6 +12,7 @@ public class AddressBookServiceImpl implements AddressBookService{
 
 	public void showOptions() {
 		int i=1;
+		
 		while (i!=0) {
 		System.out.println("Press 1 to add contacts \n"+"Press 2 to edit contact \n"+
 						   "Press 3 to delete contact \n"+"Press 0 to Exit ");
@@ -35,6 +36,8 @@ public class AddressBookServiceImpl implements AddressBookService{
 			}
 		}
 	}
+	
+	
 	public void deletePerson() {
 		contactService.deletePerson();
 	}
@@ -47,5 +50,4 @@ public class AddressBookServiceImpl implements AddressBookService{
 	public void editPerson() {
 		contactService.editPerson();		
 	}
-
-	}
+}
