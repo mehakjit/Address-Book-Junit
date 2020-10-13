@@ -2,6 +2,7 @@ package com.capgemini.service.implementation;
 
 import java.util.Scanner;
 
+import com.capgemini.dto.*;
 import com.capgemini.service.AddressBookService;
 import com.capgemini.service.ContactService;
 
@@ -10,7 +11,7 @@ public class AddressBookServiceImpl implements AddressBookService{
 	Scanner sc = new Scanner(System.in);
 	ContactService contactService = new ContactServiceImpl();
 
-	public void showOptions() {
+	public void showOptions(AddressBook addressbook ) {
 		int i=1;
 		
 		while (i!=0) {
@@ -23,31 +24,33 @@ public class AddressBookServiceImpl implements AddressBookService{
 				i=0;
 				break;
 			case 1:
-				createPerson();
+				createPerson(addressbook);
 				break;
 			case 2:
-				editPerson();
+				editPerson(addressbook);
 				break;
 			case 3:
-				deletePerson();
+				deletePerson(addressbook);
 				break;
 			default:
 				System.out.println("Wrong input enter again");
+				break;
 			}
 		}
 	}
 	
 	
-	public void deletePerson() {
-		contactService.deletePerson();
+	public void deletePerson(AddressBook addressbook ) {
+		contactService.deletePerson(addressbook );
+		
 	}
 	@Override
-	public void createPerson() {
-		contactService.createPerson();
+	public void createPerson(AddressBook addressbook ) {
+		contactService.createPerson(addressbook);
 	}
 
 	@Override
-	public void editPerson() {
-		contactService.editPerson();		
+	public void editPerson(AddressBook addressbook ) {
+		contactService.editPerson(addressbook);		
 	}
 }

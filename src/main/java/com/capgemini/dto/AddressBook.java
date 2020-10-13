@@ -16,9 +16,9 @@ public class AddressBook {
 		contacts.add(c);
 	}
 
-	public void showOption() {
+	public void showOption(AddressBook addressbook) {
 		AddressBookService addressbookservice = new AddressBookServiceImpl();
-		addressbookservice.showOptions();
+		addressbookservice.showOptions(addressbook);
 	}
 	
 	public void printContacts() {
