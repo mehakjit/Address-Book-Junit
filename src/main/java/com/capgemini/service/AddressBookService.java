@@ -1,7 +1,9 @@
 package com.capgemini.service;
 
+import com.capgemini.dto.*;
+
 public interface AddressBookService{
-	void showOptions();
-	void createPerson();
-	void editPerson();
+	void showOptions(AddressBook addressbook);
+	void createPerson(AddressBook addressbook );
+	void editPerson(AddressBook addressbook );
 }

@@ -11,10 +11,10 @@ public class ContactServiceImpl implements ContactService {
 
 	Scanner sc = new Scanner(System.in);
 	Validate validate = new Validation();
-	AddressBook addressbook = new AddressBook();
+	//AddressBook addressbook = new AddressBook();
 	Contacts contact;
 
-	public void createPerson() {
+	public void createPerson(AddressBook addressbook ) {
 		System.out.print("Enter First Name : " + "\n"
 				+ "Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.\n");
 		String firstName = validatedFirstName();
@@ -43,7 +43,7 @@ public class ContactServiceImpl implements ContactService {
 		addressbook.printContacts();
 	}
 
-	public void editPerson() {
+	public void editPerson(AddressBook addressbook) {
 		addressbook.printContacts();
 		System.out.println("Enter the first name of the contact you want to edit.");
 		String firstName = sc.nextLine();
@@ -124,7 +124,7 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public void deletePerson() {
+	public void deletePerson(AddressBook addressbook) {
 		addressbook.printContacts();
 		System.out.println("Enter the first name of the contact you want to delete.");
 		String firstName = sc.nextLine();
@@ -152,6 +152,20 @@ public class ContactServiceImpl implements ContactService {
 		addressbook.printContacts();
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private String validatedFirstName() {
 		String firstName;
 		for (;;) {
