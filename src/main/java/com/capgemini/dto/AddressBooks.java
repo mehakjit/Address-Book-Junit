@@ -1,7 +1,9 @@
 package com.capgemini.dto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 //import com.capgemini.service.AddressBookService;
 //import com.capgemini.service.implementation.AddressBookServiceImpl;
@@ -13,11 +15,12 @@ public class AddressBooks {
 	
 	Scanner sc = new Scanner(System.in);
 	HashMap<String, AddressBook > books = new HashMap<String, AddressBook>();
+	AddressBook book;
 	//AddressBookService addressBookService = new AddressBookServiceImpl();
 	//ContactService contactService = new ContactServiceImpl();
 	
 	public void createBook() {
-		AddressBook book = new AddressBook();
+		book = new AddressBook();
 		System.out.println("Enter name of new book: ");
 		String bookName = sc.nextLine();
 		while(books.containsKey(bookName)) {
@@ -38,8 +41,11 @@ public class AddressBooks {
 		}	
 	}
 	
-	public void searchByCityOrState() {
-		
+	public List<Contacts> searchByCity(String cityName) {
+		return book.contacts.stream().filter(contacts -> contacts.getCity().equals(cityName)).collect(Collectors.toList());
 	}
 	
+	public List<Contacts> searchPersonsByState(String state) {
+		return book.contacts.stream().filter(person -> person.getState().equals(state)).collect(Collectors.toList());
+	}
 }
