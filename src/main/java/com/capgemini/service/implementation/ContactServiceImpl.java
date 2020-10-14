@@ -1,11 +1,13 @@
 package com.capgemini.service.implementation;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import com.capgemini.dto.AddressBook;
 import com.capgemini.dto.Contacts;
 import com.capgemini.service.ContactService;
 import com.capgemini.service.Validate;
+import com.google.common.io.CharStreams;
 
 public class ContactServiceImpl implements ContactService {
 
@@ -21,6 +23,11 @@ public class ContactServiceImpl implements ContactService {
 		System.out.println("Enter Last Name : " + "\n"
 				+ "Correct name should start with Upper Case alphabet and should have min 3 charcaters with rest in Lower Case.");
 		String lastName = validatedLastName();
+		int count = (int) addressbook.contacts.stream().filter(contacts -> contacts.getFirstName().equals(firstName) && contacts.getLastName().equals(lastName)).count();
+		if (count == 1) {
+			System.out.println("This Name already exists try another name");
+			createPerson(addressbook);
+		}
 		System.out.print("Enter Address : ");
 		String address = validatedAddress();
 		System.out.print("Enter City : " + "\n"
