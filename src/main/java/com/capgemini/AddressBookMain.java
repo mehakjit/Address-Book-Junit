@@ -19,7 +19,7 @@ public class AddressBookMain {
 			System.out.println("Press 1 to Open Existing Contact Book \n" + "Press 2 to Create new address book \n" +
 							   "Press 3 to search a person by city \n"+"Press 4 to search a person by state \n" +
 							   "Press 5 to count the persons by city \n" + "Press 6 to count the persons state \n"+
-							   "Press 0 to Exit ");
+							   "Press 7 to sort Contacts alphabettically \n" + "Press 0 to Exit ");
 			int options = sc.nextInt();
 			switch (options) {
 			case 0:
@@ -51,6 +51,9 @@ public class AddressBookMain {
 				System.out.println("Enter city name: ");
 				String stateName = sc.nextLine();
 				System.out.println(books.countPersonsByState(stateName));
+				break;
+			case 7:
+				System.out.println(books.sortAlphabetically());
 				break;
 			default:
 				System.out.println("Wrong input enter again");

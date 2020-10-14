@@ -56,4 +56,7 @@ public class AddressBooks {
 	public int countPersonsByState(String stateName) {
 		return book.contacts.stream().filter(person -> person.getState().equals(stateName)).collect(Collectors.toList()).size();
 	}
+	public List<Contacts> sortAlphabetically(){
+		return book.contacts.stream().sorted((n1, n2) -> n1.getFirstName().compareTo(n2.getFirstName())).collect(Collectors.toList());
+	}
 }
