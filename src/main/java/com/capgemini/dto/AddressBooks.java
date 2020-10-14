@@ -35,7 +35,10 @@ public class AddressBooks {
 		if(books.containsKey(name)) {
 			AddressBook addressbook = books.get(name);
 			addressbook.showOption(addressbook);
-		}
+		}	
+	}
+	
+	public void searchByCityOrState() {
 		
 	}
 	
