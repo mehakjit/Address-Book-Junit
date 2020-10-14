@@ -48,4 +48,12 @@ public class AddressBooks {
 	public List<Contacts> searchPersonsByState(String state) {
 		return book.contacts.stream().filter(person -> person.getState().equals(state)).collect(Collectors.toList());
 	}
+
+	public int countByCity(String cityName) {
+		return book.contacts.stream().filter(person -> person.getCity().equals(cityName)).collect(Collectors.toList()).size();
+	}
+	
+	public int countPersonsByState(String stateName) {
+		return book.contacts.stream().filter(person -> person.getState().equals(stateName)).collect(Collectors.toList()).size();
+	}
 }
