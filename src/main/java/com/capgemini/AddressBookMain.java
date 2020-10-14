@@ -16,8 +16,9 @@ public class AddressBookMain {
 		int i = 1;
 
 		while (i != 0) {
-			System.out.println("Press 1 to Open Existing Contact Book \n" + "Press 2 to Create new address book \n"
-					+ "Press 0 to Exit ");
+			System.out.println("Press 1 to Open Existing Contact Book \n" + "Press 2 to Create new address book \n" +
+							   "Press 3 to search a person by city"+"Press 4 to search a person by state" +
+							   "Press 0 to Exit ");
 			int options = sc.nextInt();
 			switch (options) {
 			case 0:
@@ -29,6 +30,16 @@ public class AddressBookMain {
 				break;
 			case 2:
 				books.createBook();
+				break;
+			case 3:
+				System.out.println("Enter the name of city you want to sarch person by:-");
+				String city = sc.nextLine();
+				books.searchByCity(city);
+				break;
+			case 4:
+				System.out.println("Enter the name of city you want to sarch person by:-");
+				String state = sc.nextLine();
+				books.searchPersonsByState(state);
 				break;
 			default:
 				System.out.println("Wrong input enter again");
