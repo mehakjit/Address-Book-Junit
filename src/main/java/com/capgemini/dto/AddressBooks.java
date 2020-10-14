@@ -59,4 +59,11 @@ public class AddressBooks {
 	public List<Contacts> sortAlphabetically(){
 		return book.contacts.stream().sorted((n1, n2) -> n1.getFirstName().compareTo(n2.getFirstName())).collect(Collectors.toList());
 	}
+	public List<Contacts> sortCity(){
+		return book.contacts.stream().sorted((n1,n2) -> n1.getCity().compareTo(n2.getCity())).collect(Collectors.toList());
+	}
+	
+	public List<Contacts> sortState(){
+		return book.contacts.stream().sorted((n1,n2) -> n1.getState().compareTo(n2.getState())).collect(Collectors.toList());
+	}
 }
