@@ -17,7 +17,7 @@ public class AddressBookMain {
 
 		while (i != 0) {
 			System.out.println("Press 1 to Open Existing Contact Book \n" + "Press 2 to Create new address book \n" +
-							   "Press 3 to search a person by city"+"Press 4 to search a person by state" +
+							   "Press 3 to search a person by city \n"+"Press 4 to search a person by state \n" +
 							   "Press 0 to Exit ");
 			int options = sc.nextInt();
 			switch (options) {
