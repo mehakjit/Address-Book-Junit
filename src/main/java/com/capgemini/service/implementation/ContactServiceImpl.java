@@ -1,13 +1,13 @@
 package com.capgemini.service.implementation;
 
 import java.util.Scanner;
-//import java.util.stream.Stream;
+import java.util.stream.Stream;
 
 import com.capgemini.dto.AddressBook;
 import com.capgemini.dto.Contacts;
 import com.capgemini.service.ContactService;
 import com.capgemini.service.Validate;
-//import com.google.common.io.CharStreams;
+import com.google.common.io.CharStreams;
 
 public class ContactServiceImpl implements ContactService {
 
