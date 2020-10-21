@@ -1,0 +1,3 @@
+Contacts [firstName=Mehakjit, lastName=Singh, address=Patiala, city=Patiala, state=Punjab, zip=12345, phoneNumber=91 9999999999, email=xyz@google.com]
+Contacts [firstName=Mehak, lastName=Singh, address=Pat, city=Pay, state=Pun, zip=213546, phoneNumber=91 8888888888, email=xyz@gmail.com]
+Contacts [firstName=Mehk, lastName=Jit, address=Hja, city=Lov, state=Best, zip=987345, phoneNumber=91 8888888880, email=zyz@gmail.com]
