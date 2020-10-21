@@ -26,4 +26,14 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    // csv dependency
+    compile "org.apache.commons:commons-csv:1.5"
+    
+    compile 'org.apache.commons:commons-csv:1.8'
+    
+    compile 'com.opencsv:opencsv:5.2'
+    
+     // https://mvnrepository.com/artifact/com.opencsv/opencsv
+	compile group: 'com.opencsv', name: 'opencsv', version: '3.7'
 }

@@ -2,15 +2,27 @@ package com.capgemini;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.dto.*;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 public class AddressBookIOService {
 	
-	
+	private List<Contacts> contactList;
+	public static String CONTACT_FILE_NAME = "contactfile.txt";
+	public static String SAMPLE_CSV_FILE_PATH = "CSVcontactfie.txt";
+
 	public static void main(String[] args) {
 		List<Contacts> contactList = new ArrayList<>();
 		Contacts contact1 = new Contacts("Mehakjit", "Singh", "Patiala", "Patiala", "Punjab", "12345",
@@ -24,11 +36,11 @@ public class AddressBookIOService {
 		contactList.add(contact3);
 		writeData(contactList);
 		readData();
-
+		writeCSVData(contactList);
+		readCSVData();
 	}
 	
-	private List<Contacts> contactList;
-	public static String CONTACT_FILE_NAME = "contactfile.txt";
+	
 	
 	public AddressBookIOService() {
 
@@ -43,8 +55,8 @@ public class AddressBookIOService {
 	public static List<Contacts> readData() {
 		List<Contacts> contactsListRead = new ArrayList<>();
 		try {
-			Files.lines(new File(CONTACT_FILE_NAME).toPath()).map(line -> line.trim()).forEach(line -> {
-				String[] words = line.split("[\\s,:]+");
+			Files.lines(new File(CONTACT_FILE_NAME).toPath())//.map(line -> line.trim())
+			.forEach(line -> {String[] words = line.split("[\\s,:]+");
 
 				Contacts contact = new Contacts();
 				contact.setFirstName(words[1]);
@@ -85,4 +97,36 @@ public class AddressBookIOService {
 		}
 		return entries;
 	}
+	
+	public static List<Contacts> readCSVData() {
+		List<Contacts> contactsList = new ArrayList<>();
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
+			CsvToBean<Contacts> csvToBean = new CsvToBeanBuilder<Contacts>(reader)
+					.withType(Contacts.class).withIgnoreLeadingWhiteSpace(true).build();
+
+			contactsList = csvToBean.parse();
+			reader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return contactsList;
+	}
+
+	public static boolean writeCSVData(List<Contacts> contactList) {
+		try (Writer writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE_PATH))) {
+			StatefulBeanToCsv<Contacts> beanToCsv = new StatefulBeanToCsvBuilder<Contacts>(
+					writer).withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
+
+			beanToCsv.write(contactList);
+		} catch (CsvRequiredFieldEmptyException | CsvDataTypeMismatchException | IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
 }
+
