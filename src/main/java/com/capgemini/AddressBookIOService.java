@@ -1,6 +1,7 @@
 package com.capgemini;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -10,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.dto.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -17,8 +22,10 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 public class AddressBookIOService {
 	
+	private static final String SAMPLE_JSON_FILE_PATH = "Jsoncontactfile.txt";
 	private List<Contacts> contactList;
 	public static String CONTACT_FILE_NAME = "contactfile.txt";
 	public static String SAMPLE_CSV_FILE_PATH = "CSVcontactfie.txt";
@@ -38,6 +45,8 @@ public class AddressBookIOService {
 		readData();
 		writeCSVData(contactList);
 		readCSVData();
+		writeJsonData(contactList);
+		readJsonData();
 	}
 	
 	
@@ -128,5 +137,35 @@ public class AddressBookIOService {
 		return true;
 	}
 
+	public static boolean writeJsonData(List<Contacts> contactList) {
+		Gson gson = new Gson();
+		String json = gson.toJson(contactList);
+		try {
+			FileWriter fileWriter = new FileWriter(SAMPLE_JSON_FILE_PATH);
+			fileWriter.write(json);
+			fileWriter.close();
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean readJsonData(){
+		try {
+			Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_JSON_FILE_PATH));
+			JsonParser jsonParser = new JsonParser();
+			JsonElement obj = jsonParser.parse(reader);
+			JsonArray contactList = (JsonArray) obj;
+			System.out.println(contactList);
+			
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
 

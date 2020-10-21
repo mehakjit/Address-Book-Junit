@@ -36,4 +36,6 @@ dependencies {
     
      // https://mvnrepository.com/artifact/com.opencsv/opencsv
 	compile group: 'com.opencsv', name: 'opencsv', version: '3.7'
+	
+	compile 'com.google.code.gson:gson:2.2.+'
 }
